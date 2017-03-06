@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular Friends</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body ng-app="myApp">
+        <h1>The <strong>facebook</strong> Friend Machine</h1>
+        <div class="friends" ng-controller="FriendCtrl">
+            <form class="form-inline searchForm" role="form">
+                <div class="form-group">
+                    <input class="form-control" placeholder="Search Name" ng-model="friendFilter.name"/>
+                    <input class="form-control" placeholder="Search By State" ng-model="friendFilter.location.state"/>
+                    <select class="input-medium" ng-model="sortProp">
+                        <option value="name">Name</option>
+                        <option value="friend_count">#Friends</option>
+                        <option value="location.city">City</option>
+                        <option value="location.state">State</option>
+                        <option value="location.country">Country</option>
+                    </select>
+
+                    <select class="input-medium" ng-model="sortDirection">
+                        <option value="-">Descending</option>
+                        <option value="+">Ascending</option>
+                    </select>
+                </div>
+            </form>
+            <ul>
+                <li class='friend'
+                    ng-repeat="item in friends | filter: friendFilter | orderBy: sortDirection + sortProp">
+                    <img class="profile-pic" ng-src= "{{item.pic_square}}">
+                    <h3>{{item.name}}</h3>
+                    <div class="location">
+                        Location: {{item.location.city}}, {{item.location.state}}, {{item.location.country}}
+                    </div>
+                    <div class="status">
+                        Status: {{item.status !== null ? 'online' : 'offline'}}
+                    </div>
+                    <div class="num-friends">
+                        Friends: {{item.friend_count}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/myFriendCtrl.js"></script>
+    </body>
+</html>
