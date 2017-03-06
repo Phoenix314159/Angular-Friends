@@ -33,10 +33,10 @@
                     <img class="profile-pic" ng-src= "{{item.pic_square}}">
                     <h3>{{item.name}}</h3>
                     <div class="location">
-                        Location: {{item.location.city}}, {{item.location.state}}, {{item.location.country}}
+                        Location: {{item.location !== null ? item.location.city + "," + item.location.state + ',' + item.location.country : "unknown"}}
                     </div>
                     <div class="status">
-                        Status: {{item.status !== null ? 'online' : 'offline'}}
+                        Status: {{item.status !== null ? item.status : 'offline'}}
                     </div>
                     <div class="num-friends">
                         Friends: {{item.friend_count}}
